@@ -113,9 +113,7 @@ func (rec *Recorder) Acquire() (string, error) {
 func (rec *Recorder) Start() (string, error) {
 	currentTime := strconv.FormatInt(time.Now().Unix(), 10)
 
-	var requestBody string
-
-	requestBody = fmt.Sprintf(`
+	var requestBody string = fmt.Sprintf(`
 		{
 			"cname": "%s",
 			"uid": "%d",
@@ -126,10 +124,10 @@ func (rec *Recorder) Start() (string, error) {
 					"streamTypes": 2,
 					"channelType": 1,
 					"transcodingConfig": {
-						"height": 720,
-						"width": 1280,
-						"bitrate": 2260,
-						"fps": 15,
+						"height": 1280,
+						"width": 720,
+						"bitrate": 5000,
+						"fps": 30,
 						"mixedVideoLayout": 1,
 						"backgroundColor": "#000000"
 					}
@@ -224,9 +222,7 @@ func GetRecordingsURLs(channel string) ([]string, error) {
 		return nil, err
 	}
 
-	var creds aws.CredentialsProvider
-
-	creds = Creds{}
+	var creds aws.CredentialsProvider = Creds{}
 
 	cfg = aws.Config{
 		Region:      Regions[viper.GetInt("RECORDING_REGION")],
@@ -265,9 +261,7 @@ func GetRecordingsList(channel string) ([]string, error) {
 		return nil, err
 	}
 
-	var creds aws.CredentialsProvider
-
-	creds = Creds{}
+	var creds aws.CredentialsProvider = Creds{}
 
 	cfg = aws.Config{
 		Region:      Regions[viper.GetInt("RECORDING_REGION")],
@@ -317,9 +311,7 @@ func GetRecordings(object string) (string, error) {
 		return "", err
 	}
 
-	var creds aws.CredentialsProvider
-
-	creds = Creds{}
+	var creds aws.CredentialsProvider = Creds{}
 
 	cfg = aws.Config{
 		Region:      Regions[viper.GetInt("RECORDING_REGION")],
